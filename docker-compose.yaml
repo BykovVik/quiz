@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+    db:
+        image: postgres
+        restart: always
+        container_name: 'postgresql'
+        environment:
+            POSTGRES_USER: student
+            POSTGRES_PASSWORD: Pan1cal_DEF_111 
+            POSTGRES_DB: univerdb
+        volumes:
+            - ./data:/var/lib/postgresql/data 
+            - ./database.sql:/database.sql
+        ports:
+            - "5432:5432"
+
+
+    api:
+        build: ./app
+        volumes:
+            - ./app:/app
+        command: python3 ./app/main.py
+        ports:
+            - "8080:8080"
+        depends_on:
+            - db
