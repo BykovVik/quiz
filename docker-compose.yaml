@@ -3,19 +3,18 @@ services:
     db:
         image: postgres
         restart: always
-        container_name: 'postgresql'
+        container_name: 'postgresql-quiz'
         environment:
             POSTGRES_USER: admin
             POSTGRES_PASSWORD: Pan1cal_DEF_111 
             POSTGRES_DB: quizdb
         volumes:
             - ./data:/var/lib/postgresql/data 
-            - ./database.sql:/database.sql
         ports:
             - "5432:5432"
 
 
-    api:
+    app:
         build: ./app
         volumes:
             - ./app:/app
